@@ -3,11 +3,11 @@ import axios from 'axios';
 import { Route, Link } from 'react-router-dom';
 import FriendList from './components/FriendList';
 import FriendForm from './components/FriendForm';
-import './App.css';
+import './App.scss';
 
 const Initial = () => {
   return (
-    <Link to='/friends'>See all friends</Link>
+    <Link to='/friends'><button>See all friends</button></Link>
   )
 }
 
@@ -93,7 +93,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <h2>My friends list</h2>
+        <h1>My friends list</h1>
         <Route exact path='/' component={Initial} />
         <Route 
           path='/add' 

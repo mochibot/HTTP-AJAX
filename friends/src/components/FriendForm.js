@@ -8,7 +8,8 @@ class FriendForm extends React.Component {
       friend: {
         name: '',
         age: '',
-        email: ''
+        email: '',
+        image: ''
       }
     }
   }
@@ -48,21 +49,23 @@ class FriendForm extends React.Component {
       friend: {
         name: '',
         age: '',
-        email: ''
+        email: '',
+        image: ''
       }
     })
   }
 
   render() {
     return (
-      <div>
+      <div className='form-container' >
+        <Link to='/friends'><button>Back to friends list</button></Link>
         <form className='friend-form' onSubmit={this.submitHandler}>
-          <input type='text' placeholder='Enter name' name='name' onChange={this.inputText} value={this.state.friend.name}/>
-          <input type='number' placeholder='Enter age' name='age' onChange={this.inputText} value={this.state.friend.age}/>
-          <input type='email' placeholder='Enter email' name='email' onChange={this.inputText} value={this.state.friend.email}/>
+          <input type='text' placeholder='Enter name' name='name' onChange={this.inputText} value={this.state.friend.name} required />
+          <input type='number' placeholder='Enter age' name='age' onChange={this.inputText} value={this.state.friend.age} required />
+          <input type='string' placeholder='Enter image URL' name='image' onChange={this.inputText} value={this.state.friend.image} required />
+          <input type='email' placeholder='Enter email' name='email' onChange={this.inputText} value={this.state.friend.email} required />
           <button>{this.props.activeFriend? 'Edit friend' : 'Add friend'}</button>
         </form>
-        <Link to='/friends'><button>Back to friends list</button></Link>
       </div>
     )
   }

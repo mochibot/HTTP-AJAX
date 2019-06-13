@@ -15,36 +15,42 @@ let friends = [
     name: 'Ben',
     age: 30,
     email: 'ben@lambdaschool.com',
+    image: 'https://vignette.wikia.nocookie.net/spongebob/images/d/d7/SpongeBob_stock_art.png'
   },
   {
     id: 2,
     name: 'Austen',
     age: 32,
     email: 'austen@lambdaschool.com',
+    image: 'https://vignette.wikia.nocookie.net/spongebob/images/5/5d/Patrick_stock_art.png'
   },
   {
     id: 3,
     name: 'Ryan',
     age: 35,
     email: 'ryan@lambdaschool.com',
+    image: 'https://vignette.wikia.nocookie.net/spongebob/images/0/05/Squidward_stock_art.png'
   },
   {
     id: 4,
     name: 'Sean',
     age: 35,
     email: 'sean@lambdaschool.com',
+    image: 'https://vignette.wikia.nocookie.net/spongebob/images/7/7b/Krabs_artwork.png'
   },
   {
     id: 5,
     name: 'Michelle',
     age: 67,
     email: 'michelle@gmail.com',
+    image: 'https://vignette.wikia.nocookie.net/spongebob/images/7/77/Plankton_stock_art.png'
   },
   {
     id: 6,
     name: 'Luis',
     age: 47,
     email: 'luis@lambdaschool.com',
+    image: 'https://vignette.wikia.nocookie.net/spongebob/images/9/9e/Gary_looking_up_stock_art.png'
   },
 ];
 
