@@ -16,10 +16,7 @@ class App extends React.Component {
     super();
     this.state = {
       friends: [],
-      id: '',
-      name: '',
-      age: '',
-      email: ''
+      activeFriend: null
     }
   }
 
@@ -36,21 +33,9 @@ class App extends React.Component {
       })
   }
 
-  inputText = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value
-    })
-  }
-
-  addFriend = (event) => {
+  addFriend = (event, friend) => {
     event.preventDefault();
-    const newFriend = {
-      id: this.state.friends.length + 1,
-      name: this.state.name,
-      age: parseInt(this.state.age, 10),
-      email: this.state.email
-    }
-    axios.post('http://localhost:5000/friends', newFriend)
+    axios.post('http://localhost:5000/friends', friend)
       .then(response => {
         console.log(response);
         this.setState(prevState => {
@@ -62,21 +47,47 @@ class App extends React.Component {
       .catch(error => {
         console.log(error);
       })
-    this.setState(prevState => {
-      return {
-        id: '',
-        name: '',
-        age: '',
-        email: ''
-      }
+  }
+
+  setUpdateForm = (event, friend) => {
+    event.preventDefault();
+    this.setState({
+      activeFriend: friend
+    })
+    this.props.history.push('/add')
+  }
+
+  updateFriend = (event, friend) => {
+    event.preventDefault();
+    axios.put(`http://localhost:5000/friends/${friend.id}`, friend)
+      .then(response => {
+        console.log(response);
+        this.setState(prevState => {
+          return ({
+            friends: response.data,
+          })
+        })
+      })
+      .catch(err => console.log(err))
+    this.setState({
+      activeFriend: null
     })
   }
 
-  deleteFriend = (id) => {
-    const updatedFriends = this.state.friends.filter(item => item.id !== id);
-    this.setState({
-      friends: updatedFriends
-    })
+  deleteFriend = (event, id) => {
+    event.preventDefault();
+    axios.delete(`http://localhost:5000/friends/${id}`)
+      .then(response => {
+        console.log(response);
+        this.setState(prevState => {
+          return ({
+            friends: response.data,
+          })
+        })
+      })
+      .catch(error => {
+        console.log(error);
+      })
   }
 
   render() {
@@ -84,25 +95,24 @@ class App extends React.Component {
       <div className="App">
         <h2>My friends list</h2>
         <Route exact path='/' component={Initial} />
+        <Route 
+          path='/add' 
+          render={(props) => (
+            <FriendForm 
+            {...props}
+            addFriend={this.addFriend}
+            updateFriend={this.updateFriend}
+            activeFriend={this.state.activeFriend} />
+          )}
+        />
         <Route  
           path='/friends'
           render={(props) => (
             <FriendList 
               {...props}
               friends={this.state.friends}
-              clickHandler={this.deleteFriend}/>
-          )}
-        />
-        <Route 
-          path='/add' 
-          render={(props) => (
-            <FriendForm 
-            {...props}
-            inputText={this.inputText}
-            submitHandler={this.addFriend}
-            valueName={this.state.name}
-            valueAge={this.state.age}
-            valueEmail={this.state.email}/>
+              deleteFriend={this.deleteFriend}
+              setUpdateForm={this.setUpdateForm}/>
           )}
         />
       </div>
