@@ -46,7 +46,8 @@ class App extends React.Component {
       })
       .catch(error => {
         console.log(error);
-      })
+    })
+    this.props.history.push('/friends')
   }
 
   setUpdateForm = (event, friend) => {
@@ -72,6 +73,7 @@ class App extends React.Component {
     this.setState({
       activeFriend: null
     })
+    this.props.history.push('/friends')
   }
 
   deleteFriend = (event, id) => {
@@ -90,6 +92,14 @@ class App extends React.Component {
       })
   }
 
+  cancelAction = (event) => {
+    event.preventDefault();
+    this.setState({
+      activeFriend: null
+    })
+    this.props.history.push('/friends')
+  }
+
   render() {
     return (
       <div className="App">
@@ -102,7 +112,8 @@ class App extends React.Component {
             {...props}
             addFriend={this.addFriend}
             updateFriend={this.updateFriend}
-            activeFriend={this.state.activeFriend} />
+            activeFriend={this.state.activeFriend}
+            cancelAction={this.cancelAction} />
           )}
         />
         <Route  
@@ -112,7 +123,7 @@ class App extends React.Component {
               {...props}
               friends={this.state.friends}
               deleteFriend={this.deleteFriend}
-              setUpdateForm={this.setUpdateForm}/>
+              setUpdateForm={this.setUpdateForm} />
           )}
         />
       </div>

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 class FriendForm extends React.Component {
   constructor() {
@@ -58,7 +57,7 @@ class FriendForm extends React.Component {
   render() {
     return (
       <div className='form-container' >
-        <Link to='/friends'><button>Back to friends list</button></Link>
+        <button onClick={this.props.cancelAction}>Cancel</button>
         <form className='friend-form' onSubmit={this.submitHandler}>
           <input type='text' placeholder='Enter name' name='name' onChange={this.inputText} value={this.state.friend.name} required />
           <input type='number' placeholder='Enter age' name='age' onChange={this.inputText} value={this.state.friend.age} required />
@@ -66,6 +65,7 @@ class FriendForm extends React.Component {
           <input type='email' placeholder='Enter email' name='email' onChange={this.inputText} value={this.state.friend.email} required />
           <button>{this.props.activeFriend? 'Edit friend' : 'Add friend'}</button>
         </form>
+        
       </div>
     )
   }
